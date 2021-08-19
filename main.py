@@ -8,7 +8,8 @@ app = Flask(__name__)
 def update_system():
 	os.system("curl -o save.zip https://codeload.github.com/CodeDude404/RasberryPiOSIdea/zip/refs/heads/master")
 	os.system("unzip save.zip")
-	os.system("mv RasberryPiOSIdea-master/* ./")
+	os.system("mv -f RasberryPiOSIdea-master/* ./")
+	os.system("rm -rf RasberryPiOSIdea-master/")
 
 @app.route('/')
 def index():
@@ -17,10 +18,10 @@ def index():
 
 @app.route('/system/update')
 def update():
-	print("updating")
-	# curl -o hello.zip ftp://speedtest.tele2.net/1MB.zip
 	update_system()
 	return 'Updating System...'
+	print("updating")
+	# curl -o hello.zip ftp://speedtest.tele2.net/1MB.zip
 
 
 if __name__ == '__main__':
